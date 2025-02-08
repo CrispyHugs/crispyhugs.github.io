@@ -81,6 +81,12 @@
             border-radius: 10px;
             background-color: #ffe4e1;
         }
+        .image-container img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -100,6 +106,10 @@
             
             <p>Every word, every line, was written with you in mind. My heart belongs to you, completely. You are my first thought in the morning and my last at night. Just seeing you makes my world brighter, and your presence feels like a warm hug to my soul. I can't explain in words how much you mean to me, but you're the only one I'm afraid of losing. I don't just care about you; I cherish you with everything I have. I hope this made you smile, just as you light up my world.
             I can't wait to celebrate dozens of Valentine's Days with you throughout our lives. I love you Wania.</p>
+        </div>
+
+        <div class="image-container">
+            <img src="images/pookie.jpg" alt="Special Image">
         </div>
     </div>
 
@@ -127,7 +137,7 @@
 
             const explanation = document.createElement('div');
             explanation.className = 'explanation';
-            explanation.innerText = "Each line of the poem will unlock every hour starting from 12pm on Valentine's Day, until 12am. Click the button to see a new line poem 😘";
+            explanation.innerText = "Each line of the poem will unlock every hour starting from 12pm on Valentine's Day, until 12am. Click the button to see a new line of the poem 😘";
             poemList.appendChild(explanation);
 
             const currentDate = new Date();
@@ -169,7 +179,7 @@
             } else {
                 const message = document.createElement('div');
                 message.className = 'explanation';
-                message.innerText = "The poems will be available on February 14, 2025, from 12 PM to 12 AM. 💖";
+                message.innerText = "❤️";
                 poemList.appendChild(message);
             }
         }
