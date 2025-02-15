@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=EB+Garamond&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background-color: #ffb6c1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-y: auto;
+            flex-direction: column;
+        }
+        .container {
+            text-align: center;
+            margin-top: -50px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3em;
+            color: red;
+        }
+        p {
+            font-size: 1.8em;
+            color: #800000;
+            max-width: 80%;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        .gif-container {
+            margin-top: 20px;
+        }
+        .gif-container img {
+            width: 250px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .btn, .unlock-btn {
+            font-size: 1.5em;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+            font-family: 'EB Garamond', serif;
+            background-color: #00cc00;
+            color: white;
+            margin: 15px 0;
+        }
+        .unlock-btn {
+            margin: 20px 0;
+        }
+        .poem {
+            display: none;
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #800000;
+            white-space: pre-wrap;
+            line-height: 1.8;
+        }
+        .explanation {
+            font-size: 1.5em;
+            color: #800000;
+            margin: 20px 0;
+            font-family: 'EB Garamond', serif;
+        }
+        .final-message {
+            display: none;
+            font-size: 1.6em;
+            color: #800000;
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #800000;
+            border-radius: 10px;
+            background-color: #ffe4e1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thank You! ❤️</h1>
+        <p>
+            I can't wait to celebrate with you in person. You mean the world to me, and having you by my side is all I could ever need. Your smile lights up my day, and every moment with you feels like the most precious gift. I'm so lucky to have you in my life. I love you more than words can express, and I'm counting down the time until we're together again. 💕🌟
+        </p>
+        <div class="gif-container">
+            <img src="images/cat-cute.gif" alt="Cute Cat GIF">
+        </div>
+        <button class="btn" onclick="showPoems()">Click Here</button>
+
+        <div id="poem-list"></div>
+        <div id="final-message" class="final-message">
+            You've reached the end of the poem, but not the end of my love for you. ❤️ 
+            
+            <p>Every word, every line, was written with you in mind. My heart belongs to you, completely. You are my first thought in the morning and my last at night. Just seeing you makes my world brighter, and your presence feels like a warm hug to my soul. I can't explain in words how much you mean to me, but you're the only one I'm afraid of losing. I don't just care about you; I cherish you with everything I have. I hope this made you smile, just as you light up my world.
+            I can't wait to celebrate dozens of Valentine's Days with you throughout our lives. I love you Wania.</p>
+        </div>
+    </div>
+
+    <script>
+        const poems = [
+            "I adore the way you say my name, how your laughter fills my heart,",
+            "Even amidst a sky full of fireflies, your eyes outshine every spark.",
+            "I have yet to find a fragment of you that isn’t worth cherishing,",
+            "The thought of seeing you, precious imperfections and all, is soul-soothing.",
+            "The miles may stretch long, but nothing can keep us apart,",
+            "If I wrote down all I love about you, I'd never know where to start.",
+            "When you grabbed my arm, I knew I could never let you go,",
+            "I'll kiss your forehead gently, so you’ll always feel safe and whole.",
+            "Though I admire you from afar, you’re in my thoughts night and day,",
+            "I conjure your smile a thousand times, chasing loneliness away.",
+            "It felt like the only time I could breathe was in your embrace—",
+            "Forever and always, my heart will belong to you, in every place."
+        ];
+
+        function showPoems() {
+            const button = document.querySelector('.btn');
+            button.style.display = 'none';
+
+            const poemList = document.getElementById('poem-list');
+
+            const explanation = document.createElement('div');
+            explanation.className = 'explanation';
+            explanation.innerText = "Each line of the poem will unlock every hour starting from 12pm on Valentine's Day, until 12am. Click the button to see a new line poem 😘";
+            poemList.appendChild(explanation);
+
+            const currentDate = new Date();
+            const targetDate = new Date('2025-02-14T12:00:00-05:00');
+            const endDate = new Date('2025-02-15T00:00:00-05:00');
+
+            if (currentDate >= targetDate && currentDate < endDate) {
+                let completedCount = 0;
+
+                for (let i = 0; i < poems.length; i++) {
+                    const unlockButton = document.createElement('button');
+                    unlockButton.className = 'unlock-btn';
+                    unlockButton.innerText = `Unlock Poem ${i + 1}`;
+
+                    const poem = document.createElement('div');
+                    poem.className = 'poem';
+                    poem.textContent = poems[i];
+
+                    const unlockHour = 12 + i;
+                    if (currentDate.getHours() >= unlockHour) {
+                        unlockButton.disabled = false;
+                    } else {
+                        unlockButton.disabled = true;
+                    }
+
+                    unlockButton.addEventListener('click', () => {
+                        poem.style.display = 'block';
+                        unlockButton.style.display = 'none';
+                        completedCount++;
+
+                        if (completedCount === poems.length) {
+                            document.getElementById('final-message').style.display = 'block';
+                        }
+                    });
+
+                    poemList.appendChild(unlockButton);
+                    poemList.appendChild(poem);
+                }
+            } else {
+                const message = document.createElement('div');
+                message.className = 'explanation';
+                message.innerText = "The poems will be available on February 14, 2025, from 12 PM to 12 AM. 💖";
+                poemList.appendChild(message);
+            }
+        }
+    </script>
+</body>
+</html>
